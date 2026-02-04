@@ -1,0 +1,95 @@
+/* 1. Cài đặt chung */
+body {
+    background-color: #f8f9fa; /* Màu xám nhạt cho hiện đại (đỡ chói hơn white) */
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* transition: 0.5s; -> Bỏ cái này ở body đi, nó làm lag trang */
+}
+
+/* 2. Thanh Dock Menu (Trái tim của giao diện) */
+.nevbar {
+    position: fixed;
+    bottom: 30px; /* Cách đáy cao hơn chút cho thoáng */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Flexbox căn chỉnh */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; /* Chia đều khoảng cách các icon */
+    gap: 15px; /* Khoảng cách giữa các nút */
+    
+    /* Trang trí khung */
+    background-color: rgba(0, 0, 0, 0.85); /* Màu đen trong suốt nhẹ */
+    backdrop-filter: blur(10px); /* Hiệu ứng mờ nền (như kính) */
+    padding: 15px 30px; /* Tạo độ dày cho thanh menu */
+    border-radius: 50px; /* Bo tròn viên thuốc */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* Đổ bóng 3D */
+    z-index: 1000; /* Luôn nổi lên trên */
+    
+    /* Animation khi mới vào trang */
+    animation: slideUp 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+/* 3. Style cho các nút (Link) */
+.menulink {
+    text-decoration: none; /* Bỏ gạch chân */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: all 0.3s ease; /* Hiệu ứng mượt mà */
+    position: relative;
+}
+
+/* Icon mặc định */
+.menulink i {
+    font-size: 24px;
+    color: #aaa; /* Màu xám khi chưa chọn */
+    transition: 0.3s;
+}
+
+/* Hiệu ứng khi di chuột vào (Hover) */
+.menulink:hover {
+    background-color: rgba(255,255,255,0.1); /* Sáng nhẹ nền */
+    transform: translateY(-5px); /* Nổi lên trên 1 chút */
+}
+.menulink:hover i {
+    color: white;
+}
+
+/* 4. Trạng thái ACTIVE (Đang chọn) */
+.menulink.active {
+    background-color: #0d6efd; /* Nền xanh dương nổi bật */
+    transform: translateY(-10px) scale(1.1); /* Bay lên cao và to ra */
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.4); /* Bóng xanh phát sáng */
+}
+
+.menulink.active i {
+    color: white !important; /* Icon chắc chắn màu trắng */
+}
+
+/* 5. Nội dung (Content) */
+.content {
+    display: none;
+    padding: 100px 20px; /* Cách lề trên để không bị che, cách lề dưới cho menu */
+    min-height: 100vh; /* Full màn hình */
+}
+
+.content.active {
+    display: block;
+    animation: fadeIn 0.6s ease-out; /* Hiện dần ra */
+}
+
+/* Animation Keyframes */
+@keyframes slideUp {
+    from { bottom: -100px; opacity: 0; }
+    to { bottom: 30px; opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
